@@ -35,7 +35,7 @@ endif
 
 ifeq ($(ARM_NEON), 1)
 COMMON+= -DARM_NEON
-CFLAGS+= -DARM_NEON -mfpu=neon-vfpv4 -funsafe-math-optimizations -ftree-vectorize
+CFLAGS+= -DARM_NEON   -funsafe-math-optimizations -ftree-vectorize
 endif
 
 CFLAGS+=$(OPTS)
