@@ -11,6 +11,9 @@ EXEC=deepthings
 DARKNETLIB=libdarknet.a
 DISTRIOTLIB=libdistriot.a
 
+NNPACK=/home/sky/NNPACK/build
+CPUINFO=/home/sky/DeepThings/cpuinfo/build
+
 CC=gcc
 LDFLAGS= -lm -pthread
 CFLAGS=-Wall -fPIC
