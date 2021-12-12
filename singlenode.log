@@ -1,0 +1,203 @@
+# Single Node
+```
+./deepthings 
+layer     filters    size              input                output
+    0 conv     32  3 x 3 / 1   608 x 608 x   3   ->   608 x 608 x  32
+    1 max          2 x 2 / 2   608 x 608 x  32   ->   304 x 304 x  32
+    2 conv     64  3 x 3 / 1   304 x 304 x  32   ->   304 x 304 x  64
+    3 max          2 x 2 / 2   304 x 304 x  64   ->   152 x 152 x  64
+    4 conv    128  3 x 3 / 1   152 x 152 x  64   ->   152 x 152 x 128
+    5 conv     64  1 x 1 / 1   152 x 152 x 128   ->   152 x 152 x  64
+    6 conv    128  3 x 3 / 1   152 x 152 x  64   ->   152 x 152 x 128
+    7 max          2 x 2 / 2   152 x 152 x 128   ->    76 x  76 x 128
+    8 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256
+    9 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128
+   10 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256
+   11 max          2 x 2 / 2    76 x  76 x 256   ->    38 x  38 x 256
+   12 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512
+   13 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256
+   14 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512
+   15 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256
+   16 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512
+   17 max          2 x 2 / 2    38 x  38 x 512   ->    19 x  19 x 512
+   18 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024
+   19 conv    512  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 512
+   20 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024
+   21 conv    512  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 512
+   22 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024
+   23 conv   1024  3 x 3 / 1    19 x  19 x1024   ->    19 x  19 x1024
+   24 conv   1024  3 x 3 / 1    19 x  19 x1024   ->    19 x  19 x1024
+   25 route  16
+   26 conv     64  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x  64
+   27 reorg              / 2    38 x  38 x  64   ->    19 x  19 x 256
+   28 route  27 24
+   29 conv   1024  3 x 3 / 1    19 x  19 x1280   ->    19 x  19 x1024
+   30 conv    425  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 425
+   31 detection
+mask_scale: Using default '1.000000'
+Loading weights from ../models/yolo.weights...Done!
+layer     filters    size              input                output
+    0 conv     32  3 x 3 / 1   608 x 608 x   3   ->   608 x 608 x  32
+    1 max          2 x 2 / 2   608 x 608 x  32   ->   304 x 304 x  32
+    2 conv     64  3 x 3 / 1   304 x 304 x  32   ->   304 x 304 x  64
+    3 max          2 x 2 / 2   304 x 304 x  64   ->   152 x 152 x  64
+    4 conv    128  3 x 3 / 1   152 x 152 x  64   ->   152 x 152 x 128
+    5 conv     64  1 x 1 / 1   152 x 152 x 128   ->   152 x 152 x  64
+    6 conv    128  3 x 3 / 1   152 x 152 x  64   ->   152 x 152 x 128
+    7 max          2 x 2 / 2   152 x 152 x 128   ->    76 x  76 x 128
+    8 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256
+    9 conv    128  1 x 1 / 1    76 x  76 x 256   ->    76 x  76 x 128
+   10 conv    256  3 x 3 / 1    76 x  76 x 128   ->    76 x  76 x 256
+   11 max          2 x 2 / 2    76 x  76 x 256   ->    38 x  38 x 256
+   12 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512
+   13 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256
+   14 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512
+   15 conv    256  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x 256
+   16 conv    512  3 x 3 / 1    38 x  38 x 256   ->    38 x  38 x 512
+   17 max          2 x 2 / 2    38 x  38 x 512   ->    19 x  19 x 512
+   18 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024
+   19 conv    512  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 512
+   20 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024
+   21 conv    512  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 512
+   22 conv   1024  3 x 3 / 1    19 x  19 x 512   ->    19 x  19 x1024
+   23 conv   1024  3 x 3 / 1    19 x  19 x1024   ->    19 x  19 x1024
+   24 conv   1024  3 x 3 / 1    19 x  19 x1024   ->    19 x  19 x1024
+   25 route  16
+   26 conv     64  1 x 1 / 1    38 x  38 x 512   ->    38 x  38 x  64
+   27 reorg              / 2    38 x  38 x  64   ->    19 x  19 x 256
+   28 route  27 24
+   29 conv   1024  3 x 3 / 1    19 x  19 x1280   ->    19 x  19 x1024
+   30 conv    425  1 x 1 / 1    19 x  19 x1024   ->    19 x  19 x 425
+   31 detection
+mask_scale: Using default '1.000000'
+Loading weights from ../models/yolo.weights...Done!
+====================Processing task id is 0, data source is 0, frame_seq is 0====================
+Task is: 0, frame number is 0
+Serialize reuse data for task 0:0 
+====================Processing task id is 2, data source is 0, frame_seq is 0====================
+Task is: 2, frame number is 0
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:2 
+====================Processing task id is 4, data source is 0, frame_seq is 0====================
+Task is: 4, frame number is 0
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:4 
+====================Processing task id is 6, data source is 0, frame_seq is 0====================
+Task is: 6, frame number is 0
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:6 
+====================Processing task id is 8, data source is 0, frame_seq is 0====================
+Task is: 8, frame number is 0
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:8 
+====================Processing task id is 1, data source is 0, frame_seq is 0====================
+Task is: 1, frame number is 0
+Transfering data from client 0 to gateway
+====================Processing task id is 3, data source is 0, frame_seq is 0====================
+Task is: 3, frame number is 0
+Transfering data from client 0 to gateway
+====================Processing task id is 5, data source is 0, frame_seq is 0====================
+Task is: 5, frame number is 0
+Transfering data from client 0 to gateway
+====================Processing task id is 7, data source is 0, frame_seq is 0====================
+Task is: 7, frame number is 0
+Transfering data from client 0 to gateway
+Transfering data from client 0 to gateway
+Check ready_pool... : Client 0 is ready, merging the results
+====================Processing task id is 0, data source is 0, frame_seq is 1====================
+Task is: 0, frame number is 1
+Serialize reuse data for task 0:0 
+====================Processing task id is 2, data source is 0, frame_seq is 1====================
+Task is: 2, frame number is 1
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:2 
+====================Processing task id is 4, data source is 0, frame_seq is 1====================
+Task is: 4, frame number is 1
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:4 
+====================Processing task id is 6, data source is 0, frame_seq is 1====================
+Transfering data from client 0 to gateway
+Task is: 6, frame number is 1
+Serialize reuse data for task 0:6 
+====================Processing task id is 8, data source is 0, frame_seq is 1====================
+Task is: 8, frame number is 1
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:8 
+====================Processing task id is 1, data source is 0, frame_seq is 1====================
+Task is: 1, frame number is 1
+Transfering data from client 0 to gateway
+====================Processing task id is 3, data source is 0, frame_seq is 1====================
+Task is: 3, frame number is 1
+Transfering data from client 0 to gateway
+====================Processing task id is 5, data source is 0, frame_seq is 1====================
+Task is: 5, frame number is 1
+Transfering data from client 0 to gateway
+====================Processing task id is 7, data source is 0, frame_seq is 1====================
+Task is: 7, frame number is 1
+Transfering data from client 0 to gateway
+Transfering data from client 0 to gateway
+====================Processing task id is 0, data source is 0, frame_seq is 2====================
+Task is: 0, frame number is 2
+Serialize reuse data for task 0:0 
+====================Processing task id is 2, data source is 0, frame_seq is 2====================
+Task is: 2, frame number is 2
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:2 
+====================Processing task id is 4, data source is 0, frame_seq is 2====================
+Task is: 4, frame number is 2
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:4 
+====================Processing task id is 6, data source is 0, frame_seq is 2====================
+Task is: 6, frame number is 2
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:6 
+====================Processing task id is 8, data source is 0, frame_seq is 2====================
+Task is: 8, frame number is 2
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:8 
+====================Processing task id is 1, data source is 0, frame_seq is 2====================
+Task is: 1, frame number is 2
+Transfering data from client 0 to gateway
+====================Processing task id is 3, data source is 0, frame_seq is 2====================
+Transfering data from client 0 to gateway
+Task is: 3, frame number is 2
+====================Processing task id is 5, data source is 0, frame_seq is 2====================
+Transfering data from client 0 to gateway
+Task is: 5, frame number is 2
+====================Processing task id is 7, data source is 0, frame_seq is 2====================
+Transfering data from client 0 to gateway
+Task is: 7, frame number is 2
+Transfering data from client 0 to gateway
+====================Processing task id is 0, data source is 0, frame_seq is 3====================
+Task is: 0, frame number is 3
+Serialize reuse data for task 0:0 
+====================Processing task id is 2, data source is 0, frame_seq is 3====================
+Task is: 2, frame number is 3
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:2 
+====================Processing task id is 4, data source is 0, frame_seq is 3====================
+Task is: 4, frame number is 3
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:4 
+====================Processing task id is 6, data source is 0, frame_seq is 3====================
+Task is: 6, frame number is 3
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:6 
+====================Processing task id is 8, data source is 0, frame_seq is 3====================
+Task is: 8, frame number is 3
+Transfering data from client 0 to gateway
+Serialize reuse data for task 0:8 
+====================Processing task id is 1, data source is 0, frame_seq is 3====================
+Transfering data from client 0 to gateway
+Task is: 1, frame number is 3
+====================Processing task id is 3, data source is 0, frame_seq is 3====================
+Transfering data from client 0 to gateway
+Task is: 3, frame number is 3
+====================Processing task id is 5, data source is 0, frame_seq is 3====================
+Transfering data from client 0 to gateway
+Task is: 5, frame number is 3
+====================Processing task id is 7, data source is 0, frame_seq is 3====================
+Transfering data from client 0 to gateway
+Task is: 7, frame number is 3
+Transfering data from client 0 to gateway
+```
